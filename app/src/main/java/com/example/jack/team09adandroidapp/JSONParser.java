@@ -25,7 +25,7 @@ public class JSONParser {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+                    is, "utf-8"), 8192);
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
@@ -77,6 +77,7 @@ public class JSONParser {
             conn.setRequestProperty("Content-type", "application/json");
             conn.setFixedLengthStreamingMode(data.getBytes().length);
             conn.connect();
+            OutputStream ostream = conn.getOutputStream();
             OutputStream os = new BufferedOutputStream(conn.getOutputStream());
             os.write(data.getBytes());
             os.flush();
@@ -107,4 +108,34 @@ public class JSONParser {
         }
         return jArray;
     }
+//    public JSONObject makeHttpPost(String url, String method, JSONArray params) {
+//        try {
+//
+//            if (method == "POST") {
+//                HttpGet
+//                DefaultHttpClient httpClient = new DefaultHttpClient();
+//                HttpPost httpPost = new HttpPost(url);
+//
+//                StringEntity se = new StringEntity(params.toString(),"UTF-8");
+//
+//                se.setContentType("application/json;charset=UTF-8");
+//                httpPost.setEntity(se);
+//
+//                Log.e("Gerhard", params.toString());
+//                HttpResponse httpResponse = httpClient.execute(httpPost);
+//                HttpEntity httpEntity = httpResponse.getEntity();
+//                is = httpEntity.getContent();
+//
+//
+//
+//            }
+//
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (ClientProtocolException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
