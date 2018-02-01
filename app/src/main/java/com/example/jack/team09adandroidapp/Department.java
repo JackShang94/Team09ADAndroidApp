@@ -55,7 +55,7 @@ public class Department {
 
     public  List<Department> getAllDept(){
 
-        final String baseUrl = "http://172.17.251.237/Team09AD/AndroidServices/DisbursementListService.svc/alldept";
+        final String baseUrl = URL.baseURL+"/AndroidServices/DisbursementListService.svc/alldept";
         List<Department> deptList = new ArrayList<>();
         JSONArray a = JSONParser.getJSONArrayFromUrl(baseUrl);
         try{

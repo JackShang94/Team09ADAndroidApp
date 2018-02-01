@@ -1,10 +1,14 @@
 package com.example.jack.team09adandroidapp;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -27,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,30 +50,21 @@ import java.util.ListIterator;
  */
 
 public class DisbursementListActivity extends AppCompatActivity {
-//    class deptBindTasks extends AsyncTask<Void,Void,List<String>>{
-//        private Exception exception;
-//        protected List<String> doInBackground(Void... Void){
-//            try{
-//
-//            }
-//        }
-//    }
 
+    private View pb;
     private List<Department> ld=new ArrayList();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement);
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-//        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
+
         /**********Here for checking login state***************/
         AccountSession as =new AccountSession(this);
         as.checkLogin(this);
         /*****************************************************/
         /*****************bind dept to spinner******************/
-//
-
+//      final
+        pb = findViewById(R.id.dis_progress);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,22 +73,9 @@ public class DisbursementListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
 //
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
 
-/*******************past****************************************/
-//        NavigationView nv = (NavigationView)findViewById(R.id.nav_view);
-//        View headerv = nv.getHeaderView(0);
-//        TextView roletext =(TextView) headerv.findViewById(R.id.loginRoletextview);
-//        roletext.setText(as.getUserDetails().get("role"));
-//        TextView emailtext = headerv.findViewById(R.id.loginEmailtextView);
-//        emailtext.setText(as.getUserDetails().get("email"));
+
         final Spinner spinner = findViewById(R.id.spinner);
         final ListView disburseList = findViewById(R.id.listview);
 
@@ -133,18 +116,6 @@ public class DisbursementListActivity extends AppCompatActivity {
                 }
                 loadDis loadAsync = new loadDis(DisbursementListActivity.this,deptID);
                 loadAsync.execute((Void) null);
-//                new AsyncTask<Void,Void,List<Disbursement>>(){
-//                    @Override
-//                    protected List<Disbursement> doInBackground(Void...params){
-//
-//                    }
-//
-//                }
-//                Disbursement dis = new Disbursement();
-//                List<Disbursement> ldis = dis.getDisbursementList(deptID);
-//                MyDisAdapter myAdapter = new MyDisAdapter(DisbursementListActivity.this,ldis);
-//                disburseList.setAdapter(myAdapter);
-
 
             }
 
@@ -166,15 +137,7 @@ public class DisbursementListActivity extends AppCompatActivity {
         });
 //
     }
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -203,7 +166,12 @@ public class DisbursementListActivity extends AppCompatActivity {
             }
         }
         if(id==R.id.action_toRetrieval){
-
+            if(this.getClass().equals(RetrievalFormItemActivity.class)){
+                return false;
+            }else{
+                Intent i = new Intent(this,RetrievalFormItemActivity.class);
+                startActivity(i);
+            }
             return true;
         }
         if(id==R.id.action_logout){
@@ -238,6 +206,38 @@ public class DisbursementListActivity extends AppCompatActivity {
             ListView disburseList = findViewById(R.id.listview);
             MyDisAdapter myAdapter = new MyDisAdapter(DisbursementListActivity.this, ldis);
             disburseList.setAdapter(myAdapter);
+        }
+    }
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            pb.setVisibility(show ? View.GONE : View.VISIBLE);
+            pb.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    pb.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            pb.setVisibility(show ? View.VISIBLE : View.GONE);
+            pb.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    pb.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            pb.setVisibility(show ? View.VISIBLE : View.GONE);
+            pb.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

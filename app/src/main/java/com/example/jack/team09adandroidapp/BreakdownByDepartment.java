@@ -29,7 +29,7 @@ public class BreakdownByDepartment implements Serializable {
 
 
 
-    final static String baseURL = "http://172.17.251.239/AD/AndroidServices/RetrievalFormItemService.svc/RetrievalFormItem/get";
+    final static String baseURL =URL.baseURL+"/AndroidServices/RetrievalFormItemService.svc/RetrievalFormItem/get";
     //final static String baseURL = "http://192.168.1.95/AD/AndroidServices/RetrievalFormItemService.svc/RetrievalFormItem/get";
 
 

@@ -77,7 +77,7 @@ public class Disbursement {
     private String storeStaffID;
     private String disDate;
     private String status;
-    final String baseUrl = "http://172.17.251.237/Team09AD/AndroidServices/DisbursementListService.svc";
+    final String baseUrl = URL.baseURL+"/AndroidServices/DisbursementListService.svc";
     public List<Disbursement> getDisbursementList(String deptID){
         String url = "/Disbursement?deptID="+deptID;
         List<Disbursement> list = new ArrayList<Disbursement>();
@@ -95,6 +95,23 @@ public class Disbursement {
         }
         return list;
 
+    }
+    public List<Disbursement> getDisbursementListByrepID(String repID){
+        String url = "/DisbursementByrepID?repID="+repID;
+        List<Disbursement> list = new ArrayList<Disbursement>();
+        JSONArray a = JSONParser.getJSONArrayFromUrl((baseUrl+url));
+        try{
+
+            for(int i=0;i<a.length();i++){
+                JSONObject b = a.getJSONObject(i);
+                Disbursement d =new Disbursement( b.getInt("DisID"),b.getString("DeptID"),b.getString("StoreStaffID"),b.getString("DisDate"),b.getString("Status"));
+                list.add(d);
+            }
+        } catch (JSONException e) {
+            Log.e("object", e.toString());
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

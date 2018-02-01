@@ -72,13 +72,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if(as.isLoggedIn()){
             String role =as.getUserDetails().get("role");
             if(role.equals("rep")){
-                Intent intent = new Intent(LoginActivity.this,DisbursementListActivity.class);
-                Toast.makeText(LoginActivity.this,"Login as rep Successfully!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this,DisbursementList_rep_Activity.class);
+                Toast.makeText(LoginActivity.this,"Welcome Back rep",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }else if(role.equals("clerk")){
                 Intent intent = new Intent(LoginActivity.this,DisbursementListActivity.class);
-                Toast.makeText(LoginActivity.this,"Login as clerk Successfully!",Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this,"Welcome Back clerk ",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }
@@ -331,20 +331,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return x;//get postback string
 
 
-//            try {
-//                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
+//
 
             // TODO: register the new account here.
 //            return true;
@@ -354,30 +341,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final String success) {
             mAuthTask = null;
             showProgress(false);
-            String[] info =success.split("&");
-            String role = info[1];
-            String loginID = info[0];
             if (!success.equals("")) {
+                String[] info =success.split("&");
+                String role = info[1];
+                String loginID = info[0];
+
                 AccountSession as = new AccountSession(LoginActivity.this);
                 as.createLoginSession(mEmail,role,loginID);
 
                 if(role.equals("rep")){
 
-                    Intent intent = new Intent(LoginActivity.this,DisbursementListActivity.class);
-                    Toast.makeText(LoginActivity.this,"Login Successfully!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this,DisbursementList_rep_Activity.class);
+                    Toast.makeText(LoginActivity.this,"Login as rep Successfully!",Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                     finish();
                 }else if(role.equals("clerk")){
                     Intent intent = new Intent(LoginActivity.this,DisbursementListActivity.class);
                     startActivity(intent);
-                    Toast.makeText(LoginActivity.this,"Login Successfully!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,"Login as clerk Successfully!",Toast.LENGTH_SHORT).show();
                     finish();
 
+                }else{
+                    mEmailView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
                 }
 
             } else {
+                mEmailView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+//                mEmailView.requestFocus();
+//                mPasswordView.requestFocus();
             }
         }
 

@@ -6,34 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by doujohner on 29/1/2018.
+ * Created by doujohner on 1/2/2018.
  */
 
-public class MyDisAdapter extends BaseAdapter {
+public class MyDisAdapter_rep extends BaseAdapter{
     private Context mContext;
     private List<Disbursement> mData;
-    public MyDisAdapter(){
-
+    public MyDisAdapter_rep() {
     }
-
-    public MyDisAdapter(Context mContext, List<Disbursement> mData){
-        this.mContext = mContext;
-        this.mData = mData;
+    public MyDisAdapter_rep(Context context,List<Disbursement> mData) {
+        this.mContext=context;
+        this.mData=mData;
     }
-
     @Override
     public int getCount() {
         return mData.size();
@@ -50,17 +43,18 @@ public class MyDisAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
+        MyDisAdapter_rep.ViewHolder holder = null;
         if (convertView == null){
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.disburselist,null);
-            holder = new ViewHolder();
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.disburselist_rep,null);
+            holder = new MyDisAdapter_rep.ViewHolder();
 
-            holder.disID =  convertView.findViewById(R.id.disIDtextView);
-            holder.disDate = convertView.findViewById(R.id.disDatetextView);
+            holder.disID =  convertView.findViewById(R.id.disIDtextView_rep);
+            holder.disDate = convertView.findViewById(R.id.disDatetextView_rep);
+            holder.status = convertView.findViewById(R.id.statustextView_rep);
             convertView.setTag(holder);   //save Holder to convertView
         }else{
-            holder = (ViewHolder) convertView.getTag();
+            holder = (MyDisAdapter_rep.ViewHolder) convertView.getTag();
         }
 
         String date =mData.get(position).getDisDate();
@@ -77,15 +71,14 @@ public class MyDisAdapter extends BaseAdapter {
             Log.e("time",e.toString());
         }
         holder.disID.setText(String.valueOf(mData.get(position).getDisID()));
-
+        holder.status.setText(mData.get(position).getStatus());
         return convertView;
     }
 
     static class ViewHolder{
         TextView disID;
         TextView disDate;
+        TextView status;
     }
-
-
 
 }

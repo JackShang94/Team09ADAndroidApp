@@ -47,7 +47,7 @@ public class Account {
     private String role;
     public String authAccount(String email,String password){
 
-        String url="http://172.17.251.237/Team09AD/AndroidServices/LoginService.svc/Login";
+        String url=URL.baseURL+"/AndroidServices/LoginService.svc/Login";
         JSONObject jsonObject = new JSONObject();
 //        Account a = new Account(email,password,"");
         try{

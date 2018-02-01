@@ -61,7 +61,7 @@ public class DisbursementItem {
     private String itemDesc;
     private int expected;
     private int actual;
-    final String baseUrl = "http://172.17.251.237/Team09AD/AndroidServices/DisbursementListService.svc";
+    final String baseUrl =URL.baseURL+"/AndroidServices/DisbursementListService.svc";
     public List<DisbursementItem> getDisbursementItemByDisID(String disID){
         String url = "/Disbursement/"+disID;
         List<DisbursementItem> ldisi = new ArrayList<>();

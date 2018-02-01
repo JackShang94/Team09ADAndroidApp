@@ -54,8 +54,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 DisbursementItem disitem = new DisbursementItem();
                 disitem.updateDisbursementItem(ldisi, disID);
                 startActivity(new Intent(DisbursementListItemActivity.this, DisbursementListActivity.class));
@@ -119,7 +117,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 //                holder.actual = (EditText) convertView.findViewById(R.id.actual);
 //                holder.actual.setTag(position);
 
-//                convertView.setTag(holder);   //将Holder存储到convertView中
+//                convertView.setTag(holder);
 //            } else {
 //                holder = (MyDisItemAdapter.ViewHolder) convertView.getTag();
 //                holder.actual.setTag(position);
