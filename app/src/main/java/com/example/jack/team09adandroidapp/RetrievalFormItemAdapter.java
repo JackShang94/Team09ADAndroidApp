@@ -42,5 +42,6 @@ public class RetrievalFormItemAdapter extends ArrayAdapter<RetrievalFormItem> {
         itemNeeded.setText(String.valueOf(list.get(position).getItemNeeded()));
 
         return v;
+        //commit
     }
 }
