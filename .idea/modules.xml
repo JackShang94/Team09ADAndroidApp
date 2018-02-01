@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Team09ADAndroidApp.iml" filepath="$PROJECT_DIR$/Team09ADAndroidApp.iml" />
+      <module fileurl="file://D:\Workspace\AD_Android\Team09ADAndroidApp\.idea\Team09ADAndroidApp.iml" filepath="D:\Workspace\AD_Android\Team09ADAndroidApp\.idea\Team09ADAndroidApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
