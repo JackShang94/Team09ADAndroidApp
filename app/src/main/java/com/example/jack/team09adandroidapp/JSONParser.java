@@ -25,12 +25,15 @@ public class JSONParser {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "utf-8"), 8192);
+                    is, "iso-8859-1"), 8);
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-                sb.append('\n');
+//                sb.append('\n');
             }
+
+            sb.deleteCharAt(0);
+            sb.deleteCharAt(sb.length()-1);
             is.close();
         } catch (Exception e) {
             Log.e("readStream Exception", StackTrace.trace(e));
@@ -57,7 +60,7 @@ public class JSONParser {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-                sb.append('\n');
+//                sb.append('\n');//try to delete it
             }
             is.close();
         } catch (Exception e) {
