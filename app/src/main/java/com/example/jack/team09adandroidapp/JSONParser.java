@@ -31,6 +31,7 @@ public class JSONParser {
                 sb.append(line);
 //                sb.append('\n');
             }
+
             is.close();
         } catch (Exception e) {
             Log.e("readStream Exception", StackTrace.trace(e));
