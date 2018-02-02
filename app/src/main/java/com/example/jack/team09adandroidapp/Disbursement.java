@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +113,24 @@ public class Disbursement {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public String qrcode_rep(String loginID,String url){
+
+//        Calendar today = Calendar.getInstance();
+//        today.set(Calendar.HOUR_OF_DAY,0);
+//        Date d = today.getTime();
+        String d="testdate";
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("loginID",loginID);
+            jsonObject.put("scan_date",d);
+        }catch (Exception e){
+            Log.e("jsonobject transfer",e.toString());
+        }
+        String result = JSONParser.postStream(url,jsonObject.toString());
+        return result;
+
     }
 
 }

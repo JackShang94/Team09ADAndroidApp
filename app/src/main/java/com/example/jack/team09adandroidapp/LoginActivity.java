@@ -345,11 +345,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if(success.indexOf("\"")==0) success = success.substring(1,success.length());   //remove first "
                 if(success.lastIndexOf("\"")==(success.length()-1)) success = success.substring(0,success.length()-1);  //remove last "
                 String[] info =success.split("&");
-                String role = info[1];
-                String loginID = info[0];
+                String role="";
+                String loginID="";
+                String deptID="";
+                if(info.length==2){
+                    role = info[1];
+                    loginID = info[0];
+                }else if(info.length==3){
+                    role = info[1];
+                    loginID = info[0];
+                    deptID = info[2];
+                }
+
 
                 AccountSession as = new AccountSession(LoginActivity.this);
-                as.createLoginSession(mEmail,role,loginID);
+                as.createLoginSession(mEmail,role,loginID,deptID);
 
                 if(role.equals("rep")){
 

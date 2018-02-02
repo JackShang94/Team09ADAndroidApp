@@ -70,7 +70,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 
 
 //                startActivity(new Intent(DisbursementListItemActivity.this, DisbursementListActivity.class));
-                Toast.makeText(DisbursementListItemActivity.this,"update!",Toast.LENGTH_LONG).show();
+//                Toast.makeText(DisbursementListItemActivity.this,"update!",Toast.LENGTH_LONG).show();
 //                finish();
             }
         });
@@ -82,7 +82,11 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         d.setContentView(R.layout.qrcode_dialog);
         d.setTitle("disbursement");
         ImageView iv = (ImageView) d.findViewById(R.id.qrcode_imageView);
-        Bitmap bit =QRCodeUtil.createQRImage(URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm",200,200);
+
+        AccountSession as = new AccountSession(this);
+        String deptID = as.getUserDetails().get("deptID");
+        String qrcode_url = URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm&"+deptID;
+        Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,300,300);
         iv.setImageBitmap(bit);
         d.show();
     }

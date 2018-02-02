@@ -35,6 +35,7 @@ public class AccountSession {
     // Email address (make variable public to access from outside)
     public static final String KEY_ROLE = "role";
     public static final String KEY_LOGINID="loginID";
+    public static final String KEY_DEPTID="deptID";
     // Constructor
     public AccountSession(Context context){
         this._context = context;
@@ -46,7 +47,7 @@ public class AccountSession {
     /**
      * Create login session
      * */
-    public void createLoginSession(String email, String role,String loginID){
+    public void createLoginSession(String email, String role,String loginID,String deptID){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -56,6 +57,7 @@ public class AccountSession {
         // Storing email in pref
         editor.putString(KEY_ROLE, role);
         editor.putString(KEY_LOGINID,loginID);
+        editor.putString(KEY_DEPTID,deptID);
         // commit changes
         editor.commit();
     }
@@ -95,6 +97,7 @@ public class AccountSession {
         // user role
         user.put(KEY_ROLE, pref.getString(KEY_ROLE, null));
         user.put(KEY_LOGINID,pref.getString(KEY_LOGINID,null));
+        user.put(KEY_DEPTID,pref.getString(KEY_DEPTID,null));
         // return user
         return user;
     }
