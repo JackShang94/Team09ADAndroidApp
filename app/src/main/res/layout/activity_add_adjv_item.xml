@@ -12,7 +12,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="420dp"
         android:stretchColumns="1">
 
         <TableRow
@@ -21,31 +21,31 @@
 
 
             <TextView
-                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Item Code" />
+                android:text="Item Code"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/textView_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="" />
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:padding="6dp"
-                android:text="Category" />
+                android:text="Category"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
             <TextView
@@ -53,28 +53,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="" />
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:padding="6dp"
-                android:text="Description" />
+                android:text="Description"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/textView_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="6dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="" />
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
         </TableRow>
@@ -82,36 +83,38 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:padding="6dp"
-                android:text="Qty Adjusted"  />
+                android:text="Qty Adjusted"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
+                android:id="@+id/editText_qty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/editText_qty"/>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:padding="6dp"
-                android:text="Remarks"  />
+                android:text="Remarks"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
+                android:id="@+id/editText_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/editText_remark"/>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </TableRow>
 
@@ -120,13 +123,14 @@
             android:layout_height="match_parent">
 
             <Button
+                android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADD"
-                android:id="@+id/button_add" />
+                android:text="ADD" />
         </TableRow>
-
-
-
     </TableLayout>
+    <Button android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_margin="5dip"
+        android:layout_gravity="right" android:id="@+id/button_viewAdjVList"
+        android:text="View Adj Cart"></Button>
 </LinearLayout>

@@ -16,14 +16,13 @@
         android:paddingBottom="5dp">
 
         <TextView
-            android:id="@+id/textView_cat"
             android:layout_width="36dp"
             android:layout_height="31dp"
             android:layout_weight="0.20"
             android:text="Category: " />
 
         <EditText
-            android:id="@+id/edtiText_cat"
+            android:id="@+id/edtiText_search"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.20"
@@ -40,30 +39,22 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView_ITEM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Items"
-        android:textAllCaps="true"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:background="#ffffff">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
-
-        <ListView
-            android:id="@+id/listview_itemlist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+        <TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#000000"
+            android:textSize="24dip" android:layout_margin="5dip" android:text="Item Catalog"></TextView>
+        <ListView android:layout_height="wrap_content"
+            android:layout_weight="1" android:id="@+id/listview_itemlist"
+            android:layout_width="fill_parent" android:background="#ffffff"
+            android:clickable="true" android:cacheColorHint="#ffffff">
+        </ListView>
+        <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_margin="5dip"
+            android:layout_gravity="right" android:id="@+id/button_viewAdjVList"
+            android:text="View Adj Cart"></Button>
     </LinearLayout>
 
 </LinearLayout>

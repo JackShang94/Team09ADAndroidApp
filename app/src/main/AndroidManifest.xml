@@ -34,7 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddAdjustmentVoucher"></activity>
+        <activity android:name=".AddAdjustmentVoucherActivity"></activity>
+        <activity android:name=".SubmitAdjustmentVoucherActivity"></activity>
     </application>
 
 </manifest>

@@ -1,18 +1,21 @@
 package com.example.jack.team09adandroidapp;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by e0224927 on 28/1/2018.
+ * Created by Yuanxushu on 28/1/2018.
  */
 
 public class Item extends HashMap<String,String>{
-    final static String baseURL = "http://172.17.251.72:80/team09/AndroidServices/ItemService.svc/";
+    final static String baseURL = "http://172.17.251.72:80/logicU/AndroidServices/ItemService.svc/";
 
 
     public Item(String itemID,String categoryID,String description,String location,
@@ -29,7 +32,7 @@ public class Item extends HashMap<String,String>{
     }
 
     public static List<Item> getItemList() {
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL + "Item" );
+        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL + "Items" );
         List<Item> ItemList = new ArrayList<Item>();
         try {
             for (int i = 0; i < a.length(); i++) {
@@ -41,13 +44,13 @@ public class Item extends HashMap<String,String>{
                         b.getString("QtyOnHand")));
             }
         } catch (Exception e) {
-
+            Log.e("item",e.toString());
         }
         return (ItemList);
     }
 
-    public static List<Item> getItemListByCAT(String category) {
-        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL + "Item/" + category);
+    public static List<Item> getItemListBySearch(String keyword) {
+        JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL + "Items/" + keyword);
         List<Item> ItemList = new ArrayList<Item>();
         try {
             for (int i = 0; i < a.length(); i++) {
@@ -59,9 +62,22 @@ public class Item extends HashMap<String,String>{
                         b.getString("QtyOnHand")));
             }
         }catch(Exception e){
-
+            Log.e("itemSearch",e.toString());
         }
         return(ItemList);
+    }
+
+    public static Item getItemByID(String id) {
+        Item item = null;
+        try {
+            JSONObject jb = JSONParser.getJSONFromUrl(baseURL+"Item/"+id);
+            item = new Item(jb.getString("ItemID"), jb.getString("CategoryID"),jb.getString("Description"),jb.getString("Location"), jb.getString("UnitOfMeasure"),
+                            jb.getString("ReorderLevel"),jb.getString("ReorderQty"),
+                            jb.getString("QtyOnHand"));
+        } catch (Exception e) {
+            Log.e("getItemID",e.toString());
+        }
+        return item;
     }
 
 }

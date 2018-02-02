@@ -3,6 +3,7 @@ package com.example.jack.team09adandroidapp;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,22 +17,26 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by CHEN ZIQING on 2018/1/28.
+ * Created by Yuanxushu on 2018/1/28.
  */
 
 public class ItemListActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_itemlist);
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
 
+        Button button_search = (Button) findViewById(R.id.button_search);
+        Button button_view = (Button) findViewById(R.id.button_viewAdjVList);
+
+        //show item catelog when this activity starts
         final ListView list = (ListView) findViewById(R.id.listview_itemlist);
-
-
         new AsyncTask<Void, Void, List<Item>>() {
             @Override
             protected List<Item> doInBackground(Void... params) {
@@ -58,21 +63,24 @@ public class ItemListActivity extends Activity {
                         Intent intent = new Intent(ItemListActivity.this, AddAdjustmentVoucherActivity.class);
                         intent.putExtra("ItemID", item.get("ItemID"));
                         startActivity(intent);
+
                     }
                 });
             }
         }.execute();
 
-        Button button = findViewById(R.id.button_search);
-        button.setOnClickListener(new View.OnClickListener() {
+
+
+        //show itemlist based on search result
+        button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final ListView listView = (ListView) findViewById(R.id.listview_itemlist);
                 new AsyncTask<Void, Void, List<Item>>() {
                     @Override
                     protected List<Item> doInBackground(Void... params) {
-                        EditText editText = (EditText) findViewById(R.id.edtiText_cat);
-                        return Item.getItemListByCAT(editText.getText().toString());
+                        EditText editText = (EditText) findViewById(R.id.edtiText_search);
+                        return Item.getItemListBySearch(editText.getText().toString());
                     }
 
                     @Override
@@ -84,7 +92,7 @@ public class ItemListActivity extends Activity {
 //                }
                         SimpleAdapter adapter = new SimpleAdapter(ItemListActivity.this,
                                 result, R.layout.simple_item_listview_item,
-                                new String[]{"itemID", "categoryID", "description"},
+                                new String[]{"ItemID", "CategoryID", "Description"},
                                 new int[]{R.id.textView_iID, R.id.textView_iCAT, R.id.textView_iDescription});
                         list.setAdapter(adapter);
 
@@ -93,12 +101,21 @@ public class ItemListActivity extends Activity {
                             public void onItemClick(AdapterView<?> av, View v, int position, long id) {
                                 Item item = (Item) av.getAdapter().getItem(position);
                                 Intent intent = new Intent(ItemListActivity.this, AddAdjustmentVoucherActivity.class);
-                                intent.putExtra("itemID", item.get("itemID"));
+                                intent.putExtra("ItemID", item.get("ItemID"));
                                 startActivity(intent);
                             }
                         });
                     }
                 }.execute();
+            }
+        });
+
+        //jump to adjlist activity when click view btn
+        button_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ItemListActivity.this, SubmitAdjustmentVoucherActivity.class);
+                startActivity(intent);
             }
         });
     }
