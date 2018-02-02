@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,13 +19,12 @@ import java.util.List;
 
 public class AdjustmentVoucherCartAdapter extends BaseAdapter {
     private List<AdjustmentVoucherCartItem> myCartList;
-//    private LayoutInflater myInflater;
     private boolean myCheckbox;
     private Context context;
 
-    public AdjustmentVoucherCartAdapter(List<AdjustmentVoucherCartItem> list,Context context, boolean Checkbox) {
+    public AdjustmentVoucherCartAdapter(List<AdjustmentVoucherCartItem> list, Context context, boolean Checkbox) {
         this.myCartList = list;
-        this.context=context;
+        this.context = context;
         boolean myCheckbox = Checkbox;
     }
 
@@ -47,46 +48,55 @@ public class AdjustmentVoucherCartAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewItem item;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.simple_adjvlist_item,
                     null);
-            item = new ViewItem();
-            item.itemCode = (TextView) convertView.findViewById(R.id.textView_itemCode);
-            item.itemDescription = (TextView) convertView.findViewById(R.id.textView_itemDescription);
-            item.qtyAdjusted = (TextView) convertView.findViewById(R.id.textView_adjQty);
-            item.record = (TextView) convertView.findViewById(R.id.textView_adjRecord);
-            item.itemCheckbox = (CheckBox) convertView.findViewById(R.id.CheckBoxSelected);
-
-            convertView.setTag(item);
+            holder = new ViewHolder();
+            holder.itemCode = (TextView) convertView.findViewById(R.id.textView_itemCode);
+            holder.itemDescription = (TextView) convertView.findViewById(R.id.textView_itemDescription);
+            holder.qtyAdjusted = (TextView) convertView.findViewById(R.id.textView_adjQty);
+            holder.record = (TextView) convertView.findViewById(R.id.textView_adjRecord);
+            holder.itemCheckbox = (CheckBox) convertView.findViewById(R.id.CheckBoxSelected);
+            convertView.setTag(holder);
         } else {
-            item = (ViewItem) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        AdjustmentVoucherCartItem cartItem = myCartList.get(position);
-        item.itemCode.setText(cartItem.getItemID());
-        item.itemDescription.setText(cartItem.getDescription());
-        item.qtyAdjusted.setText(Integer.toString(cartItem.getQtyAdjusted()));
-        item.record.setText(cartItem.getRecord());
+        final AdjustmentVoucherCartItem cartItem = myCartList.get(position);
+        holder.itemCode.setText(cartItem.getItemID());
+        holder.itemDescription.setText(cartItem.getDescription());
+        holder.qtyAdjusted.setText(Integer.toString(cartItem.getQtyAdjusted()));
+        holder.record.setText(cartItem.getRecord());
 
-        if (!myCheckbox) {
-            item.itemCheckbox.setVisibility(View.GONE);
-        } else {
-            if (cartItem.selected == true)
-                item.itemCheckbox.setChecked(true);
-            else
-                item.itemCheckbox.setChecked(false);
-        }
+        holder.itemCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    cartItem.selected = true;
+                } else {
+                    cartItem.selected = false;
+                }
+            }
+        });
+        holder.itemCheckbox.setChecked(cartItem.selected);
         return convertView;
     }
 
-
-    private class ViewItem {
+    private class ViewHolder {
         TextView itemCode;
         TextView itemDescription;
         TextView qtyAdjusted;
         TextView record;
         CheckBox itemCheckbox;
+    }
+
+    public void deleteAll() {
+        if (myCartList == null) {
+            myCartList = new ArrayList<AdjustmentVoucherCartItem>();
+        }
+        myCartList.clear();
+        notifyDataSetChanged();
     }
 }
 

@@ -7,54 +7,86 @@
     android:orientation="vertical"
     tools:context="com.example.jack.team09adandroidapp.ItemListActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
 
-        <TextView
-            android:layout_width="36dp"
-            android:layout_height="31dp"
-            android:layout_weight="0.20"
-            android:text="Category: " />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:stretchColumns="3">
 
-        <EditText
-            android:id="@+id/edtiText_search"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20"
-            android:ems="10"
-            android:inputType="text"
-            android:text="" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button-search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20"
-            android:text="Search" />
+                <EditText
+                    android:id="@+id/edtiText_search"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="monospace"
+                    android:inputType="text"
+                    android:text="e.g.C001/clip"
+                    android:focusable="auto"
+                    android:textColorLink="@android:color/holo_orange_light" />
 
+                <Button
+                    android:id="@+id/button-search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:layout_weight="1"
+                    android:text="Search" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:background="#ffffff">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
 
-        <TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:textColor="#000000"
-            android:textSize="24dip" android:layout_margin="5dip" android:text="Item Catalog"></TextView>
-        <ListView android:layout_height="wrap_content"
-            android:layout_weight="1" android:id="@+id/listview_itemlist"
-            android:layout_width="fill_parent" android:background="#ffffff"
-            android:clickable="true" android:cacheColorHint="#ffffff">
-        </ListView>
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_margin="5dip"
-            android:layout_gravity="right" android:id="@+id/button_viewAdjVList"
-            android:text="View Adj Cart"></Button>
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dip"
+            android:text="Item Catalog"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24dip"></TextView>
+
+        <ListView
+            android:id="@+id/listview_itemlist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:cacheColorHint="#ffffff"
+            android:clickable="true"></ListView>
+
+        <!--<Button-->
+            <!--android:id="@+id/button_viewAdjVList"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_margin="5dip"-->
+            <!--android:text="View Adj Cart"></Button>-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fltbtn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@android:drawable/ic_dialog_dialer"
+            app:backgroundTint="@android:color/background_dark" />
+
     </LinearLayout>
-
 </LinearLayout>

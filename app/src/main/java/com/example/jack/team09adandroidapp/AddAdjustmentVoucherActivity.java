@@ -2,6 +2,7 @@ package com.example.jack.team09adandroidapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
     EditText editText_qty;
     EditText editText_rmk;
     Button button;
+    Button button_cart;
 
     //show item info
     @Override
@@ -67,7 +69,6 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
         adjVCart = (ArrayList) dataSave.getDataList("adjVCart");
         button.setOnClickListener(this);
     }
-
     //add this item to adjList
     @Override
     public void onClick(View v) {
@@ -83,9 +84,13 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
 
         //success msg
         Toast.makeText(AddAdjustmentVoucherActivity.this ,
-                "Add to adjustment list successfully!" , Toast.LENGTH_SHORT)
+                "Add to adjustment list successfully!" , Toast.LENGTH_LONG)
                 .show();
+
+        Intent intent = new Intent(AddAdjustmentVoucherActivity.this, SubmitAdjustmentVoucherActivity.class);
+        startActivity(intent);
     }
+
 }
 
 

@@ -44,7 +44,7 @@ public class ListDataSave implements Serializable {
      * save list
      */
     public <T> void setDataList(String tag, List<AdjustmentVoucherCartItem> datalist) {
-        if (null == datalist || datalist.size() <= 0) {
+        if (null == datalist || datalist.size() < 0) {
             return;
         }
         Gson gson = new Gson();
@@ -56,7 +56,7 @@ public class ListDataSave implements Serializable {
     /**
      * remove one item from list
      */
-    public <T>  void remove(String tag, AdjustmentVoucherCartItem item) {
+    public <T> void remove(String tag, AdjustmentVoucherCartItem item) {
         List<AdjustmentVoucherCartItem> datalist = getDataList(tag);
         if (null == datalist || datalist.size() <= 0) {
             return;
@@ -72,7 +72,7 @@ public class ListDataSave implements Serializable {
     /**
      * clear the cart list
      */
-    public  void clearAll(String tag) {
+    public void clearAll(String tag) {
         editor.clear();
         editor.commit();
     }

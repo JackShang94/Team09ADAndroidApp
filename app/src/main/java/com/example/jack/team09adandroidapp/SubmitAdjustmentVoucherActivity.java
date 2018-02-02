@@ -50,11 +50,14 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
         myAdapter = new AdjustmentVoucherCartAdapter(adjVCart, this, true);
         listViewCart.setAdapter(myAdapter);
 
+        //                if (result.isEmpty()) {
+//                    TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
+//                    txtMsg.setVisibility(View.VISIBLE);
+//                }
+
         listViewCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AdjustmentVoucherCartItem selectedItem = adjVCart.get(position);
                 if (selectedItem.selected == true) {
                     selectedItem.selected = false;
@@ -62,6 +65,7 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
                     selectedItem.selected = true;
                 }
                 myAdapter.notifyDataSetInvalidated();
+                myAdapter.notifyDataSetChanged();
             }
         });
 
@@ -70,20 +74,28 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Loop through and remove all the products that are selected
                 // Loop backwards so that the remove works correctly
-                for (int i = adjVCart.size() - 1; i >= 0; i--) {
+                for(int i =adjVCart.size()-1;i>=0;i--){
 
-                    if (adjVCart.get(i).selected) {
+                    if(adjVCart.get(i).selected){
                         adjVCart.remove(i);
                     }
                 }
+//                for (AdjustmentVoucherCartItem cartItem : adjVCart) {
+//                    if (cartItem.selected) {
+//                        adjVCart.remove(cartItem);
+//
+//                    }
+//                }
                 dataSave.setDataList("adjVCart", adjVCart);
                 myAdapter.notifyDataSetChanged();
-                listViewCart.setAdapter(myAdapter);
-                ArrayList<AdjustmentVoucherCartItem> testList = adjVCart;
+                listViewCart.invalidate();
             }
         });
+
+
         //submit this adjV and clear cart
         Button button_submit = (Button) findViewById(R.id.Button_submit);
         button_submit.setOnClickListener(new View.OnClickListener() {
@@ -91,19 +103,20 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
             public void onClick(View view) {
                 //submit the list to db
                 AdjustmentVoucherCartItem adjV = new AdjustmentVoucherCartItem();
-                int result =adjV.addNewAdjV(adjVCart);
-                if(result==0){
+                int result = adjV.addNewAdjV(adjVCart);
+                if (result == 0) {
                     Toast.makeText(SubmitAdjustmentVoucherActivity.this,
                             "Submit Failed!", Toast.LENGTH_SHORT)
                             .show();
-                }else if(result==1){
+                } else if (result == 1) {
                     dataSave.clearAll("adjVCart");
                     Toast.makeText(SubmitAdjustmentVoucherActivity.this,
-                            "Submit Successfully!", Toast.LENGTH_SHORT)
+                            "Submit Successfully!", Toast.LENGTH_LONG)
                             .show();
-                }
-                //clear the list
 
+                    Intent intent = new Intent(SubmitAdjustmentVoucherActivity.this, ItemListActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -112,83 +125,23 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
         button_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                myAdapter.deleteAll();
                 dataSave.clearAll("adjVCart");
+                myAdapter.notifyDataSetChanged();
+                listViewCart.invalidate();
+
                 Toast.makeText(SubmitAdjustmentVoucherActivity.this,
-                        "Clear Successfully!", Toast.LENGTH_SHORT)
-                        .show();
+                        "Clear Successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button_add = (Button) findViewById(R.id.Button_ADD);
+        button_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(SubmitAdjustmentVoucherActivity.this, ItemListActivity.class);
+                startActivity(intent);
             }
         });
     }
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_submit_adjv);
-//        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-//        Button button_submit = (Button) findViewById(R.id.Button_submit);
-//        Button button_remove = (Button) findViewById(R.id.Button_Remove);
-//        Button button_clear = (Button) findViewById(R.id.Button_clear);
-//
-//        //show adj list info
-//        final ListView list = (ListView) findViewById(R.id.listview_adjvList);
-//        mContext = getApplicationContext();
-//        dataSave = new ListDataSave(mContext, "adjVCart");
-//        adjVCart = (ArrayList) dataSave.getDataList("adjVCart");
-//        String s = adjVCart.get(0).get("ItemID");
-//
-//        new AsyncTask<Void, Void, List<AdjustmentVoucherCartItem>>() {
-//            @Override
-//            protected List<AdjustmentVoucherCartItem> doInBackground(Void... params) {
-//                return adjVCart;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(List<AdjustmentVoucherCartItem> result) {
-//
-//                SimpleAdapter adapter = new SimpleAdapter(SubmitAdjustmentVoucherActivity.this,
-//                        result, R.layout.simple_adjvlist_item,
-//                        new String[]{"ItemID", "Description", "AdjustedQty", "Record"},
-//                        new int[]{R.id.textView_itemCode, R.id.textView_itemDescription,
-//                                R.id.textView_adjQty, R.id.textView_adjRecord});
-//                list.setAdapter(adapter);
-//
-////                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-////                    @Override
-////                    public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-////                        Item item = (Item) av.getAdapter().getItem(position);
-////                        Intent intent = new Intent(SubmitAdjustmentVoucherActivity.this, AddAdjustmentVoucherActivity.class);
-////                        intent.putExtra("ItemID", item.get("ItemID"));
-////                        startActivity(intent);
-////
-////                    }
-////                });
-//            }
-//        }.execute();
-//
-//        //remove item
-//        button_remove.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//
-//        //submit this adjV and clear cart
-//        button_submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//        //clear all items from the adjlist cart
-//        button_clear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            dataSave.clearAll("adjVCart");
-//                Toast.makeText(SubmitAdjustmentVoucherActivity.this ,
-//                        "Clear Successfully!" , Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        });
-//    }
 }

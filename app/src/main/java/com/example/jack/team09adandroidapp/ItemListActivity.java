@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +34,7 @@ public class ItemListActivity extends Activity {
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
 
         Button button_search = (Button) findViewById(R.id.button_search);
-        Button button_view = (Button) findViewById(R.id.button_viewAdjVList);
+        FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.fltbtn_add);
 
         //show item catelog when this activity starts
         final ListView list = (ListView) findViewById(R.id.listview_itemlist);
@@ -69,8 +70,6 @@ public class ItemListActivity extends Activity {
             }
         }.execute();
 
-
-
         //show itemlist based on search result
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +85,7 @@ public class ItemListActivity extends Activity {
                     @Override
                     protected void onPostExecute(List<Item> result) {
 
-//                if (result.isEmpty()) {
-//                    TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-//                    txtMsg.setVisibility(View.VISIBLE);
-//                }
+
                         SimpleAdapter adapter = new SimpleAdapter(ItemListActivity.this,
                                 result, R.layout.simple_item_listview_item,
                                 new String[]{"ItemID", "CategoryID", "Description"},
@@ -111,7 +107,7 @@ public class ItemListActivity extends Activity {
         });
 
         //jump to adjlist activity when click view btn
-        button_view.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ItemListActivity.this, SubmitAdjustmentVoucherActivity.class);
