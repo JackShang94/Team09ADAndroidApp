@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -30,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -37,6 +39,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.qrcode.encoder.QRCode;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -63,12 +72,14 @@ public class DisbursementListActivity extends AppCompatActivity {
         as.checkLogin(this);
         /*****************************************************/
         /*****************bind dept to spinner******************/
-//      final
+
         pb = findViewById(R.id.dis_progress);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                qrcodepopup();
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -138,6 +149,14 @@ public class DisbursementListActivity extends AppCompatActivity {
 //
     }
 
+    public void qrcodepopup(){
+        Dialog d = new Dialog(this);
+        d.setContentView(R.layout.qrcode_dialog);
+        d.setTitle("disbursement");
+        ImageView iv = (ImageView) d.findViewById(R.id.qrcode_imageView);
+        iv.setImageResource(R.drawable.ic_menu_gallery);
+        d.show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

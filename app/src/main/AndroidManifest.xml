@@ -10,6 +10,11 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -35,7 +40,8 @@
         <activity android:name=".RetrievalFormItemActivity" />
         <activity android:name=".DisbursementList_rep_Activity"
             android:label="DisbursementList_rep"/>
-        <activity android:name=".DisbursementItem_rep_Activity"/>
+        <activity android:name=".DisbursementItem_rep_Activity"
+            android:label="DisbursementItem"/>
     </application>
 
 </manifest>
