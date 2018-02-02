@@ -92,6 +92,7 @@ public class RetrievalFormItemActivity extends AppCompatActivity {
             }else{
                 Intent i = new Intent(this,DisbursementListActivity.class);
                 startActivity(i);
+                finish();
             }
         }
         if(id==R.id.action_toRetrieval){
@@ -100,6 +101,7 @@ public class RetrievalFormItemActivity extends AppCompatActivity {
             }else{
                 Intent i = new Intent(this,RetrievalFormItemActivity.class);
                 startActivity(i);
+                finish();
             }
             return true;
         }

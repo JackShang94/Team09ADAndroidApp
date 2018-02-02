@@ -338,10 +338,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected void onPostExecute(final String success) {
+        protected void onPostExecute( String success) {
             mAuthTask = null;
             showProgress(false);
             if (!success.equals("")) {
+                if(success.indexOf("\"")==0) success = success.substring(1,success.length());   //remove first "
+                if(success.lastIndexOf("\"")==(success.length()-1)) success = success.substring(0,success.length()-1);  //remove last "
                 String[] info =success.split("&");
                 String role = info[1];
                 String loginID = info[0];

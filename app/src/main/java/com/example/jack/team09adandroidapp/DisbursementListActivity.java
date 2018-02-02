@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -78,9 +79,9 @@ public class DisbursementListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qrcodepopup();
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+
+                Snackbar.make(view, "processing", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -149,14 +150,7 @@ public class DisbursementListActivity extends AppCompatActivity {
 //
     }
 
-    public void qrcodepopup(){
-        Dialog d = new Dialog(this);
-        d.setContentView(R.layout.qrcode_dialog);
-        d.setTitle("disbursement");
-        ImageView iv = (ImageView) d.findViewById(R.id.qrcode_imageView);
-        iv.setImageResource(R.drawable.ic_menu_gallery);
-        d.show();
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.jack.team09adandroidapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -39,9 +40,12 @@
         <activity android:name=".RetrievalFormItemByDeptActivity" />
         <activity android:name=".RetrievalFormItemActivity" />
         <activity android:name=".DisbursementList_rep_Activity"
-            android:label="DisbursementList_rep"/>
+            android:label="DisbursementList_rep"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
         <activity android:name=".DisbursementItem_rep_Activity"
             android:label="DisbursementItem"/>
+
     </application>
 
 </manifest>

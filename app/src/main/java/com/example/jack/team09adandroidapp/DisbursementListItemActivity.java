@@ -1,7 +1,9 @@
 package com.example.jack.team09adandroidapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,16 +58,34 @@ public class DisbursementListItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DisbursementItem disitem = new DisbursementItem();
-                disitem.updateDisbursementItem(ldisi, disID);
-                startActivity(new Intent(DisbursementListItemActivity.this, DisbursementListActivity.class));
+                int result =disitem.updateDisbursementItem(ldisi, disID);
+/****************************generate QRCode***********************************/
+                if(result==1){
+                    qrcodepopup(disID);
+                }else{
+                    Toast.makeText(DisbursementListItemActivity.this,"Update!",Toast.LENGTH_LONG).show();
+                }
+
+/******************************************************************************/
+
+
+//                startActivity(new Intent(DisbursementListItemActivity.this, DisbursementListActivity.class));
                 Toast.makeText(DisbursementListItemActivity.this,"update!",Toast.LENGTH_LONG).show();
-                finish();
+//                finish();
             }
         });
 
 
     }
-
+    public void qrcodepopup(String disID){
+        Dialog d = new Dialog(this);
+        d.setContentView(R.layout.qrcode_dialog);
+        d.setTitle("disbursement");
+        ImageView iv = (ImageView) d.findViewById(R.id.qrcode_imageView);
+        Bitmap bit =QRCodeUtil.createQRImage(URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm",200,200);
+        iv.setImageBitmap(bit);
+        d.show();
+    }
     public class MyDisItemAdapter extends BaseAdapter {
         private Context mContext;
         private List<DisbursementItem> mData;

@@ -79,7 +79,7 @@ public class DisbursementItem {
         return ldisi;
     }
 
-    public  void updateDisbursementItem(List<DisbursementItem> ldisItem,String disID){
+    public  int updateDisbursementItem(List<DisbursementItem> ldisItem,String disID){
         String url = "/Disbursement/"+disID+"/update";
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -98,8 +98,14 @@ public class DisbursementItem {
             Log.e("jsonWrong",e.toString());
         }
 
-        JSONParser.postStream(baseUrl+url,jsonObject.toString());
-        return;
+        String result =JSONParser.postStream(baseUrl+url,jsonObject.toString());
+        int success=0;
+        try{
+            success = Integer.valueOf(result);
+        }catch (Exception e){
+            Log.e("disitemInteger",e.toString());
+        }
+        return success;
 
     }
 
