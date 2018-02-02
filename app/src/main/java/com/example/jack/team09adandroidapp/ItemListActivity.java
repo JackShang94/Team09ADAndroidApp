@@ -106,7 +106,7 @@ public class ItemListActivity extends Activity {
             }
         });
 
-        //jump to adjlist activity when click view btn
+        //view adjcart
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
