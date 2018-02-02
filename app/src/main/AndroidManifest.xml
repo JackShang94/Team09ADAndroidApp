@@ -45,7 +45,9 @@
             tools:replace="screenOrientation"/>
         <activity android:name=".DisbursementItem_rep_Activity"
             android:label="DisbursementItem"/>
-
+        <activity android:name=".ItemListActivity" />
+        <activity android:name=".AddAdjustmentVoucherActivity" />
+        <activity android:name=".SubmitAdjustmentVoucherActivity" />
     </application>
 
 </manifest>
