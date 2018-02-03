@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AdjustmentVoucherCartItem implements Serializable {
 
-    final static String baseURL = "http://172.17.251.72:80/logicU/AndroidServices/AdjustmentCartItemService.svc/";
+    final static String baseURL = URL.baseURL+"/AndroidServices/AdjustmentCartItemService.svc/";
     private String itemID;
     private String description;
     private int qtyAdjusted;
@@ -62,7 +62,7 @@ public class AdjustmentVoucherCartItem implements Serializable {
     }
 
 
-    public int addNewAdjV(List<AdjustmentVoucherCartItem> adjVCart){
+    public int addNewAdjV(List<AdjustmentVoucherCartItem> adjVCart,String staffID){
 //        Gson gson=new Gson();
 //        String list=gson.toJson(adjVCart);
         JSONArray jsonArray=new JSONArray();
@@ -87,7 +87,7 @@ public class AdjustmentVoucherCartItem implements Serializable {
         }catch (Exception e){
             Log.e("cartlist",e.toString());
         }
-        String staffID = "clerk001";
+//        String staffID = "clerk001";
 //        jsonString
         String result= JSONParser.postStream(baseURL+"ADJV/post/addAdj/"+staffID,jsonString.toString());
         int result_int =0;

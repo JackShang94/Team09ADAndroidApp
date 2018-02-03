@@ -26,13 +26,15 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
     ListDataSave dataSave;
     private ArrayList<AdjustmentVoucherCartItem> adjVCart;
     private AdjustmentVoucherCartAdapter myAdapter;
-
+    private AccountSession as;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_adjv);
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
 
+        AccountSession as = new AccountSession(this);
+        this.as=as;
         //get the cart list
         mContext = getApplicationContext();
         dataSave = new ListDataSave(mContext, "adjVCart");
@@ -103,7 +105,10 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
             public void onClick(View view) {
                 //submit the list to db
                 AdjustmentVoucherCartItem adjV = new AdjustmentVoucherCartItem();
-                int result = adjV.addNewAdjV(adjVCart);
+                AccountSession as = new AccountSession(SubmitAdjustmentVoucherActivity.this);
+                /**********************need staffID****************************/
+                int result = adjV.addNewAdjV(adjVCart,as.getUserDetails().get("loginID"));
+                /************************************************************/
                 if (result == 0) {
                     Toast.makeText(SubmitAdjustmentVoucherActivity.this,
                             "Submit Failed!", Toast.LENGTH_SHORT)
