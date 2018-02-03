@@ -6,14 +6,20 @@
     <TextView
         android:id="@+id/disIDtextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_weight="1"
-        android:text="" />
+        android:lineSpacingExtra="55dp"
+        android:lineSpacingMultiplier="2.5"
+        android:text="abc"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/disDatetextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_weight="1"
-        android:text="" />
+        android:lineSpacingExtra="36sp"
+        android:lineSpacingMultiplier="2.5"
+        android:text="abc"
+        android:textAlignment="center" />
 </LinearLayout>

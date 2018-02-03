@@ -167,8 +167,16 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                 if(editable.toString().equals("")){
 
                 }else{
-                    String id =mData.get(this.position).getItemID();
-                   mData.get(this.position).setActual(Integer.parseInt(editable.toString()));
+                    int expected=mData.get(this.position).getExpected();
+                    int actual=Integer.parseInt(editable.toString());
+                    if(actual>expected){
+                        Toast.makeText(DisbursementListItemActivity.this,"Must be less than expected!",Toast.LENGTH_SHORT).show();
+                        actual=expected;
+                        return;
+                    }
+
+//                    String id =mData.get(this.position).getItemID();
+                    mData.get(this.position).setActual(actual);
                 }
 
             }
