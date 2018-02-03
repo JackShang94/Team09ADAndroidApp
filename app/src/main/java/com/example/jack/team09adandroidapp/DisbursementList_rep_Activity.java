@@ -24,6 +24,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -60,12 +61,12 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
             }
 
             if(result_returnInt==1){
-                Toast.makeText(DisbursementList_rep_Activity.this, "update successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(DisbursementList_rep_Activity.this, "Update successfully", Toast.LENGTH_LONG).show();
 //                Intent refresh = new Intent(DisbursementList_rep_Activity.this, DisbursementItem_rep_Activity.class);
 //                startActivity(refresh);
 //                DisbursementList_rep_Activity.this.finish(); //
             }else{
-                Toast.makeText(DisbursementList_rep_Activity.this, ":update failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(DisbursementList_rep_Activity.this, "Failed Please try again", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -89,28 +90,14 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
                     url = result_info[0];
                 }
 
-                if(as.getUserDetails().get("deptID").equals(deptID)){//check if this is corresponding dept
+                if(!as.getUserDetails().get("deptID").equals(deptID)){//check if this is corresponding dept
                     Toast.makeText(this, "You are not authenticated", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Disbursement dis = new Disbursement();
                 qrcode_async qrcodeAsync = new qrcode_async(as.getUserDetails().get("loginID"),url);
                 qrcodeAsync.execute((Void) null);
-//                String result_return = dis.qrcode_rep(as.getUserDetails().get("loginID"),url);//get data,so is supposed to use asynctask
-//                try{
-//                    int result_returnInt = Integer.parseInt(result_return);
-//                    if(result_returnInt==1){
-//                        Toast.makeText(this, "update successfully", Toast.LENGTH_LONG).show();
-//                        Intent refresh = new Intent(this, DisbursementItem_rep_Activity.class);
-//                        startActivity(refresh);
-//                        this.finish(); //
-//                    }else{
-//                        Toast.makeText(this, ":update failed", Toast.LENGTH_LONG).show();
-//                    }
 //
-//                }catch (Exception e){
-//                    Log.e("int parse",e.toString());
-//                }
 
 
             }
@@ -181,6 +168,17 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Disbursement> ldis) {
             ListView disburseList = findViewById(R.id.rep_listview);
+            if(ldis.size()==0){
+                TextView rep_dis = findViewById(R.id.rep_nodistextView);
+                rep_dis.setVisibility(View.VISIBLE);
+                FloatingActionButton rep_scan = findViewById(R.id.fab);
+                rep_scan.setVisibility(View.GONE);
+            }else if(ldis.size()>0){
+                TextView rep_dis = findViewById(R.id.rep_nodistextView);
+                rep_dis.setVisibility(View.GONE);
+                FloatingActionButton rep_scan = findViewById(R.id.fab);
+                rep_scan.setVisibility(View.VISIBLE);
+            }
             MyDisAdapter_rep myAdapter = new MyDisAdapter_rep(DisbursementList_rep_Activity.this, ldis);
             disburseList.setAdapter(myAdapter);
         }

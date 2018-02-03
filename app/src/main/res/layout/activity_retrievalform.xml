@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.example.jack.team09adandroidapp.RetrievalFormItemActivity">
 
-    <TextView
-        android:id="@+id/txtTitleDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retrieval Form"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textSize="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+    <!--<TextView-->
+        <!--android:id="@+id/txtTitleDisplay"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Retrieval Form"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:gravity="center"-->
+        <!--android:includeFontPadding="false"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textAllCaps="true"-->
+        <!--android:textSize="20dp"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
 
     <ListView
         android:id="@+id/listview_retrievalFormItem"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_below="@+id/txtTitleDisplay"/>
+        android:layout_width="0dp"
+        android:layout_height="486dp"
+
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtMsg"
+        android:id="@+id/no_retrievaltextView"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:text="No Retrieval Form Found"
-        android:visibility="invisible"
-        android:paddingTop="240dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/listview_retrievalFormItem" />
-
-
-</RelativeLayout>
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="No Retrieval Form"
+        app:layout_constraintBottom_toBottomOf="@+id/listview_retrievalFormItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

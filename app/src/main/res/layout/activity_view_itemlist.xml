@@ -32,7 +32,7 @@
                     android:ems="10"
                     android:fontFamily="monospace"
                     android:inputType="text"
-                    android:text="e.g.C001/clip"
+                    android:hint="e.g.C001/clip"
                     android:focusable="auto"
                     android:textColorLink="@android:color/holo_orange_light" />
 

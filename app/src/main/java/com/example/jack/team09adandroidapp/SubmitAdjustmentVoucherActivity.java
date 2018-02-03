@@ -72,18 +72,36 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
         });
 
         //remove selected items
-        Button removeButton = (Button) findViewById(R.id.Button_Remove);
+        final Button removeButton = (Button) findViewById(R.id.Button_Remove);
+        final Button button_submit = (Button) findViewById(R.id.Button_submit);
+        final Button button_clear = (Button) findViewById(R.id.Button_clear);
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // Loop through and remove all the products that are selected
                 // Loop backwards so that the remove works correctly
-                for(int i =adjVCart.size()-1;i>=0;i--){
+                int initialSize = adjVCart.size();
+                for(int i =initialSize-1;i>=0;i--){
 
                     if(adjVCart.get(i).selected){
                         adjVCart.remove(i);
                     }
+                }
+                if(initialSize==adjVCart.size()){//havent select the item
+                    Toast.makeText(SubmitAdjustmentVoucherActivity.this,
+                            "Please select at least an item!", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                if(adjVCart.size()==0){
+                    removeButton.setVisibility(View.GONE);
+                    button_submit.setVisibility(View.GONE);
+
+                }else{
+
+                    button_submit.setVisibility(View.VISIBLE);
+
                 }
 //                for (AdjustmentVoucherCartItem cartItem : adjVCart) {
 //                    if (cartItem.selected) {
@@ -99,7 +117,7 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
 
 
         //submit this adjV and clear cart
-        Button button_submit = (Button) findViewById(R.id.Button_submit);
+
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,12 +139,13 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
 
                     Intent intent = new Intent(SubmitAdjustmentVoucherActivity.this, ItemListActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
 
         //clear all items from the adjlist cart
-        Button button_clear = (Button) findViewById(R.id.Button_clear);
+
         button_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,18 +153,31 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
                 dataSave.clearAll("adjVCart");
                 myAdapter.notifyDataSetChanged();
                 listViewCart.invalidate();
+                button_submit.setVisibility(View.GONE);
+                removeButton.setVisibility(View.GONE);
 
                 Toast.makeText(SubmitAdjustmentVoucherActivity.this,
                         "Clear Successfully!", Toast.LENGTH_SHORT).show();
             }
         });
+        /*************************Nothing in cart************************/
+        if(adjVCart.size()==0){
 
+            removeButton.setVisibility(View.GONE);
+            button_submit.setVisibility(View.GONE);
+        }else{
+
+            removeButton.setVisibility(View.VISIBLE);
+            button_submit.setVisibility(View.VISIBLE);
+        }
+        /****************************************************************/
         Button button_add = (Button) findViewById(R.id.Button_ADD);
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(SubmitAdjustmentVoucherActivity.this, ItemListActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

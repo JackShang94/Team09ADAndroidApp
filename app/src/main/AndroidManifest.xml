@@ -38,14 +38,15 @@
             android:configChanges="orientation|keyboard|keyboardHidden" />
         <activity android:name=".DisbursementListActivity" />
         <activity android:name=".RetrievalFormItemByDeptActivity" />
-        <activity android:name=".RetrievalFormItemActivity" />
+        <activity android:name=".RetrievalFormItemActivity"
+            android:label="RetrievalForm"/>
         <activity android:name=".DisbursementList_rep_Activity"
             android:label="DisbursementList_rep"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            />
         <activity android:name=".DisbursementItem_rep_Activity"
             android:label="DisbursementItem"/>
-        <activity android:name=".ItemListActivity" />
+        <activity android:name=".ItemListActivity"
+            android:label="Select item"/>
         <activity android:name=".AddAdjustmentVoucherActivity" />
         <activity android:name=".SubmitAdjustmentVoucherActivity" />
     </application>

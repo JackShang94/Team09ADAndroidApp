@@ -45,6 +45,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         final Button submitBtn = findViewById(R.id.submitbutton);
         Intent i = getIntent();
         final String disID = i.getStringExtra("disID");
+        final String deptID = i.getStringExtra("deptID");
         DisbursementItem disi = new DisbursementItem();
 //        List<DisbursementItem> ldisi = new ArrayList<>();
         ldisi = disi.getDisbursementItemByDisID(disID);
@@ -61,7 +62,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                 int result =disitem.updateDisbursementItem(ldisi, disID);
 /****************************generate QRCode***********************************/
                 if(result==1){
-                    qrcodepopup(disID);
+                    qrcodepopup(disID,deptID);
                 }else{
                     Toast.makeText(DisbursementListItemActivity.this,"Update!",Toast.LENGTH_LONG).show();
                 }
@@ -77,14 +78,14 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 
 
     }
-    public void qrcodepopup(String disID){
+    public void qrcodepopup(String disID,String deptID){
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.qrcode_dialog);
         d.setTitle("disbursement");
         ImageView iv = (ImageView) d.findViewById(R.id.qrcode_imageView);
 
         AccountSession as = new AccountSession(this);
-        String deptID = as.getUserDetails().get("deptID");
+
         String qrcode_url = URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm&"+deptID;
         Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,300,300);
         iv.setImageBitmap(bit);
@@ -121,8 +122,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-//            MyDisItemAdapter.ViewHolder holder = null;
-//            if (convertView == null) {
+//
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.disbursementitem, null);
                 TextView itemID = convertView.findViewById(R.id.itemIDtextview);
                 TextView itemDesc = convertView.findViewById(R.id.itemDesctextview);
@@ -135,34 +135,10 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                 actual.setText(String.valueOf(mData.get(position).getActual()));
 
                 actual.addTextChangedListener(new ActualChangeListener(position));
-//                holder = new MyDisItemAdapter.ViewHolder();
-//                holder.itemID =(TextView) convertView.findViewById(R.id.itemIDtextview);
-//                holder.itemDesc =(TextView) convertView.findViewById(R.id.itemDesctextview);
-//                holder.expected =(TextView) convertView.findViewById(R.id.expected);
-//                holder.actual = (EditText) convertView.findViewById(R.id.actual);
-//                holder.actual.setTag(position);
-
-//                convertView.setTag(holder);
-//            } else {
-//                holder = (MyDisItemAdapter.ViewHolder) convertView.getTag();
-//                holder.actual.setTag(position);
-//            }
-
-//            holder.itemID.setText(mData.get(position).getItemID());
-//            holder.itemDesc.setText(mData.get(position).getItemDesc());
-//            holder.expected.setText(String.valueOf(mData.get(position).getExpected()));
-//            holder.actual.setText(String.valueOf(mData.get(position).getActual()));
-//            holder.actual.addTextChangedListener(new ActualChangeListener(holder));
+//
 //
                 return convertView;
-//            }
-
-//        public class ViewHolder {
-//            TextView itemID;
-//            TextView itemDesc;
-//            TextView expected;
-//            EditText actual;
-//        }
+//
         }
         private class ActualChangeListener implements TextWatcher{
 //            private ViewHolder holder;

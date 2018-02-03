@@ -55,6 +55,9 @@ public class RetrievalFormItemByDeptActivity extends Activity {
 
         Intent it = new Intent(getApplicationContext(),RetrievalFormItemActivity.class);
         startActivity(it);
+        finish();
     }
+
+
 
 }

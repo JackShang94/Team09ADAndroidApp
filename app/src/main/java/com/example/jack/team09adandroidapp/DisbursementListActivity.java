@@ -63,6 +63,7 @@ public class DisbursementListActivity extends AppCompatActivity {
 
     private View pb;
     private List<Department> ld=new ArrayList();
+    private String deptID=null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +76,8 @@ public class DisbursementListActivity extends AppCompatActivity {
         /*****************bind dept to spinner******************/
 
         pb = findViewById(R.id.dis_progress);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
 
-                Snackbar.make(view, "processing", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 //
 
 
@@ -119,7 +112,7 @@ public class DisbursementListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item_string =adapterView.getItemAtPosition(i).toString();
-                String deptID =null;
+
                 for (Department d:ld) {
                     if(d.getDeptName()==item_string){
                         deptID=d.getDeptID();
@@ -144,6 +137,7 @@ public class DisbursementListActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(DisbursementListActivity.this,DisbursementListItemActivity.class);
                 intent.putExtra("disID",disID);
+                intent.putExtra("deptID",deptID);
                 startActivity(intent);
             }
         });
@@ -167,11 +161,16 @@ public class DisbursementListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_adjustment) {
+            if(this.getClass().equals(ItemListActivity.class)){
+                return false;
+            }else{
+                Intent i =new Intent(this,ItemListActivity.class);
+                startActivity(i);
+            }
 
-            return true;
         }
         if(id ==R.id.action_toDisbursement){
-            if(this.getClass()==DisbursementListActivity.class){
+            if(this.getClass().equals(DisbursementListActivity.class)){
                 return false;
             }else{
                 Intent i = new Intent(this,DisbursementListActivity.class);
@@ -217,8 +216,16 @@ public class DisbursementListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Disbursement> ldis) {
             ListView disburseList = findViewById(R.id.listview);
+            if(ldis.size()==0){
+                TextView nodis = findViewById(R.id.nodistextView);
+                nodis.setVisibility(View.VISIBLE);
+            }else{
+                TextView nodis = findViewById(R.id.nodistextView);
+                nodis.setVisibility(View.GONE);
+            }
             MyDisAdapter myAdapter = new MyDisAdapter(DisbursementListActivity.this, ldis);
             disburseList.setAdapter(myAdapter);
+
         }
     }
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -43,7 +44,10 @@ public class RetrievalFormItemActivity extends AppCompatActivity {
         final ListView lv = (ListView) findViewById(R.id.listview_retrievalFormItem);
 
         list = RetrievalFormItem.getRetrievalFormItems();
-
+        if(list.size()==0){
+            TextView nore = findViewById(R.id.no_retrievaltextView);
+            nore.setVisibility(View.VISIBLE);
+        }
         RetrievalFormItemAdapter adapter = new RetrievalFormItemAdapter(this, list);
         lv.setAdapter(adapter);
 
@@ -83,8 +87,13 @@ public class RetrievalFormItemActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_adjustment) {
+            if(this.getClass().equals(ItemListActivity.class)){
+                return false;
+            }else{
+                Intent i =new Intent(this,ItemListActivity.class);
+                startActivity(i);
+            }
 
-            return true;
         }
         if(id ==R.id.action_toDisbursement){
             if(this.getClass().equals(DisbursementListActivity.class)){

@@ -13,13 +13,13 @@
         android:text="Adjustment Voucher List"
         android:textColor="#000000"
         android:textColorLink="@android:color/holo_orange_light"
-        android:textSize="24dip"
+        android:textSize="18sp"
         tools:fontFamily="monospace"></TextView>
 
     <ListView
         android:id="@+id/listview_adjvList"
         android:layout_width="fill_parent"
-        android:layout_height="409dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#ffffff"
         android:cacheColorHint="#ffffff"
@@ -28,34 +28,46 @@
     </ListView>
 
 
-
-    <LinearLayout android:id="@+id/LinearLayout01"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:layout_margin="5dip">
-        <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Button_ADD"
-            android:text="ADD New"></Button>
 
-        <Button android:layout_width="wrap_content"
+        android:layout_margin="5dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Button_ADD"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="ADD New"
+            android:textSize="12sp"></Button>
+
+        <Button
             android:id="@+id/Button_Remove"
-            android:text="delete"></Button>
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textSize="12sp"></Button>
 
         <Button
             android:id="@+id/Button_clear"
-            android:layout_width="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="68dp"
             android:layout_height="wrap_content"
-            android:text="clear"></Button>
+            android:text="clear"
+            android:textSize="12sp"></Button>
 
         <Button
             android:id="@+id/Button_submit"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="submit"></Button>
+            android:text="submitAll"
+            android:textSize="12sp"></Button>
 
 
     </LinearLayout>
