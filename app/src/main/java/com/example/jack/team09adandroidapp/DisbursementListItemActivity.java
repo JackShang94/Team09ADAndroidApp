@@ -97,7 +97,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         AccountSession as = new AccountSession(this);
 
         String qrcode_url = URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm&"+deptID;
-        Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,400,400);
+        Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,800,800);
         iv.setImageBitmap(bit);
         d.show();
     }

@@ -42,6 +42,8 @@
             android:label="RetrievalForm"/>
         <activity android:name=".DisbursementList_rep_Activity"
             android:label="DisbursementList_rep"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"
             />
         <activity android:name=".DisbursementItem_rep_Activity"
             android:label="DisbursementItem"/>

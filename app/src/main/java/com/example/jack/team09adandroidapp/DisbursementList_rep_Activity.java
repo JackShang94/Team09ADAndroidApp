@@ -33,7 +33,7 @@ import java.util.List;
 public class DisbursementList_rep_Activity extends AppCompatActivity {
     private View pb;
     private AccountSession as;
-
+    private MyDisAdapter a;
     public class qrcode_async extends AsyncTask<Void,Void,Void>{
         private String loginID;
         private String url;
@@ -97,16 +97,12 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
                 Disbursement dis = new Disbursement();
                 qrcode_async qrcodeAsync = new qrcode_async(as.getUserDetails().get("loginID"),url);
                 qrcodeAsync.execute((Void) null);
-//
-
-
+                
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +147,6 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
     }
 
 
-
     public class loadDis_rep extends AsyncTask<Void,Void,List<Disbursement>>{
         private Context context;
         private String repID;
@@ -180,7 +175,9 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
                 rep_scan.setVisibility(View.VISIBLE);
             }
             MyDisAdapter_rep myAdapter = new MyDisAdapter_rep(DisbursementList_rep_Activity.this, ldis);
+
             disburseList.setAdapter(myAdapter);
+
         }
     }
 
