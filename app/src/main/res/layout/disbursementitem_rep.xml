@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_weight="1"
+android:orientation="horizontal">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="249dp"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/itemIDtextview_rep"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:layout_weight="1"
-        android:text=""
-        android:visibility="visible"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="itemIDtextview"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/itemDesctextview_rep"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
-        android:layout_weight="1"
-        android:text="" />
-
-
-    <TextView
-        android:id="@+id/expected_rep"
-        android:layout_width="74dp"
-        android:layout_height="41dp"
-        android:layout_weight="1"
-        android:text="" />
-    <TextView
-        android:id="@+id/actual_rep"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:text="itemDescription"
+        android:textColor="@android:color/background_dark"
+        android:textSize="17sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expected:"/>
+        <TextView
+            android:id="@+id/expected_rep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="expected"
+            android:textColor="@android:color/background_dark"
+            android:textSize="17sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actual:     "/>
+        <TextView
+            android:id="@+id/actual_rep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="actual"
+            android:textColor="@android:color/background_dark"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
 </LinearLayout>
