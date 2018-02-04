@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +26,7 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
     Context mContext;
     ListDataSave dataSave;
     private ArrayList<AdjustmentVoucherCartItem> adjVCart;
-
+    private StringBuilder canlogin=new StringBuilder();
     TextView textView_id;
     TextView textView_description;
     EditText editText_qty;
@@ -37,7 +39,38 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_adjv_item);
+
+//        final StringBuilder canlogin = new StringBuilder();
+        canlogin.append("no");
         initView();
+    }
+    private class ChangedQtyListener implements TextWatcher{
+        private EditText qtyEditText;
+        public ChangedQtyListener(EditText e){
+            this.qtyEditText=e;
+        }
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(editable.toString().equals("")){
+                qtyEditText.setError("Must not be Empty!");
+                canlogin.setLength(0);
+                canlogin.append("no");
+            }else{
+                qtyEditText.setError(null);
+                canlogin.setLength(0);
+                canlogin.append("yes");
+            }
+        }
     }
     void initView() {
         textView_id = (TextView) findViewById(R.id.textView_id);
@@ -45,7 +78,7 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
         editText_qty = (EditText) findViewById(R.id.editText_qty);
         editText_rmk = (EditText) findViewById(R.id.editText_remark);
         button = (Button) findViewById(R.id.button_add);
-
+        editText_qty.addTextChangedListener(new ChangedQtyListener(editText_qty));
         //show Item Info
         String itemID = getIntent().getExtras().getString("ItemID");
         new AsyncTask<String, Void, Item>() {
@@ -73,10 +106,14 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
     @Override
     public void onClick(View v) {
         AdjustmentVoucherCartItem cartItem =new AdjustmentVoucherCartItem();
-
+        String qty = editText_qty.getText().toString();
+        if(canlogin.toString().equals("no")){
+            editText_qty.setError("Must not be EMPTY");
+            return;
+        }
         cartItem.setItemID(textView_id.getText().toString());
         cartItem.setDescription(textView_description.getText().toString());
-        cartItem.setQtyAdjusted(Integer.parseInt(editText_qty.getText().toString()));
+        cartItem.setQtyAdjusted(Integer.parseInt(qty));
         cartItem.setRecord(editText_rmk.getText().toString());
         cartItem.selected=false;
         adjVCart.add(cartItem);

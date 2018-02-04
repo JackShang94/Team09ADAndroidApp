@@ -62,7 +62,6 @@ public class MyDisAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-
         String date =mData.get(position).getDisDate();
         try {
             String results = date.replaceAll("^/Date\\(","");
@@ -85,7 +84,4 @@ public class MyDisAdapter extends BaseAdapter {
         TextView disID;
         TextView disDate;
     }
-
-
-
 }

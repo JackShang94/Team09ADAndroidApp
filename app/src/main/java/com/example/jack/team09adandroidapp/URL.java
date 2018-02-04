@@ -5,7 +5,7 @@ package com.example.jack.team09adandroidapp;
  */
 
 public class URL {
-    public static final String baseURL = "http://192.168.0.12/Team09AD";// Liang 172.17.250.4:8090
+    public static final String baseURL = "http://172.17.251.72/logicU";// Liang 172.17.250.4:8090//YUAN:172.17.251.72
 
 
 }

@@ -15,11 +15,11 @@
     <item
         android:id="@+id/action_adjustment"
         android:orderInCategory="102"
-        android:title="adjustment"
+        android:title="Adjustment"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="103"
-        android:title="logout"
+        android:title="Logout"
         app:showAsAction="never"/>
 </menu>

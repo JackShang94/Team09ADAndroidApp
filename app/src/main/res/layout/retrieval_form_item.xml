@@ -1,68 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_weight="1"
+android:gravity="center"
+android:orientation="vertical">
+<TextView
+    android:id="@+id/itemID"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:text="Code"
+    android:textColor="@android:color/background_dark"
+    android:textSize="20sp"
+    android:textStyle="normal" />
+
+<TextView
+    android:id="@+id/itemDescription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="itemDescription"
+    android:textSize="17sp"
+    android:textColor="@android:color/background_dark" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/itemID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/itemDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemID"
-        app:layout_constraintVertical_bias="0.0" />
-
+        android:textSize="18sp"
+        android:text="Location:  " />
 
     <TextView
         android:id="@+id/itemLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemDescription"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp"
+        android:text="location"
+        android:textColor="@android:color/background_dark" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/Display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#808080"
-        android:text = "Items needed:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemLocation"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp"
+        android:text="Items needed:  " />
 
     <TextView
         android:id="@+id/itemNeeded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Display"
-        app:layout_constraintVertical_bias="0.0" />
-
-</android.support.constraint.ConstraintLayout>
+        android:textSize="18sp"
+        android:text="needed"
+        android:textColor="@android:color/background_dark" />
+</LinearLayout>
+</LinearLayout>

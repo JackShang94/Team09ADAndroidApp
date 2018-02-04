@@ -50,7 +50,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 //        List<DisbursementItem> ldisi = new ArrayList<>();
         ldisi = disi.getDisbursementItemByDisID(disID);
         final StringBuilder canlogin = new StringBuilder();
-        canlogin.append("no");
+        canlogin.append("yes");
         MyDisItemAdapter myDisItemAdapter = new MyDisItemAdapter(DisbursementListItemActivity.this, ldisi,canlogin);
         disItemlv.setAdapter(myDisItemAdapter);
 //        int k =disItemlv.getCount();

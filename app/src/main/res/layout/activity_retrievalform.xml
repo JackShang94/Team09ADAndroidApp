@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jack.team09adandroidapp.RetrievalFormItemActivity">
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtTitleDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="By item"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp">
 
-    <!--<TextView-->
-        <!--android:id="@+id/txtTitleDisplay"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Retrieval Form"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:gravity="center"-->
-        <!--android:includeFontPadding="false"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:textSize="20dp"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentStart="true" />-->
-
+    </TextView>
 
     <ListView
         android:id="@+id/listview_retrievalFormItem"
-        android:layout_width="0dp"
-        android:layout_height="486dp"
-
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/txtTitleDisplay"/>
 
     <TextView
         android:id="@+id/no_retrievaltextView"
@@ -41,9 +36,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="No Retrieval Form"
-        app:layout_constraintBottom_toBottomOf="@+id/listview_retrievalFormItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:text="No Retrieval Form"/>
+</RelativeLayout>
+
+
+
