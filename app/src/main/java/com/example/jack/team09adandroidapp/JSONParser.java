@@ -1,5 +1,6 @@
 
 package com.example.jack.team09adandroidapp;
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -41,24 +42,33 @@ public class JSONParser {
     public static String getStream(String url) {
         InputStream is = null;
         StringBuilder sb = new StringBuilder();
+        String testName = "testuser";
+        String testPwd = "testpassword";
+        byte[] credential = (testName+":"+testPwd).getBytes();
+        StringBuilder c = new StringBuilder()
+                .append("Basic ")
+                .append(Base64.encodeToString(credential,Base64.DEFAULT));
         try {
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+            conn.addRequestProperty("Authorization",c.toString());
             conn.setRequestMethod("GET");
             conn.connect();
             is = conn.getInputStream();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-                sb.append('\n');
+//                sb.append('\n');
             }
             is.close();
         } catch (Exception e) {
@@ -69,8 +79,15 @@ public class JSONParser {
     public static String postStream(String url, String data) {
         InputStream is = null;
         try {
+            String testName = "testuser";
+            String testPwd = "testpassword";
+            byte[] credential = (testName+":"+testPwd).getBytes();
+            StringBuilder c = new StringBuilder()
+                    .append("Basic ")
+                    .append(Base64.encodeToString(credential,Base64.DEFAULT));
             URL u = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+            conn.addRequestProperty("Authorization",c.toString());
             conn.setRequestMethod("POST");
             conn.setDoInput(true);
             conn.setDoOutput(true);

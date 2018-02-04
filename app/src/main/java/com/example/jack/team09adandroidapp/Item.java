@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class Item extends HashMap<String,String>{
-    final static String baseURL = "http://172.17.251.72:80/logicU/AndroidServices/ItemService.svc/";
+    final static String baseURL = URL.baseURL+"/AndroidServices/ItemService.svc/";
 
 
     public Item(String itemID,String categoryID,String description,String location,

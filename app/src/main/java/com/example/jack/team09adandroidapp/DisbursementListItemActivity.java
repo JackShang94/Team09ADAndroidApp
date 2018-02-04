@@ -49,7 +49,9 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         DisbursementItem disi = new DisbursementItem();
 //        List<DisbursementItem> ldisi = new ArrayList<>();
         ldisi = disi.getDisbursementItemByDisID(disID);
-        MyDisItemAdapter myDisItemAdapter = new MyDisItemAdapter(DisbursementListItemActivity.this, ldisi);
+        final StringBuilder canlogin = new StringBuilder();
+        canlogin.append("no");
+        MyDisItemAdapter myDisItemAdapter = new MyDisItemAdapter(DisbursementListItemActivity.this, ldisi,canlogin);
         disItemlv.setAdapter(myDisItemAdapter);
 //        int k =disItemlv.getCount();
 //        if(disItemlv.getAdapter().getCount()!=0){
@@ -60,11 +62,19 @@ public class DisbursementListItemActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DisbursementItem disitem = new DisbursementItem();
                 int result =disitem.updateDisbursementItem(ldisi, disID);
+//                for(int i =disItemlv.getAdapter().getCount()-1;i>=0;i--){
+//                    View v =disItemlv.getAdapter().getView(i,LayoutInflater.from(DisbursementListItemActivity.this).inflate(R.layout.disbursementitem, null))
+//                    v.findViewById()
+//                }
+                if(canlogin.toString().equals("no")){
+                    Toast.makeText(DisbursementListItemActivity.this,"Something wrong!",Toast.LENGTH_LONG).show();
+                    return;
+                }
 /****************************generate QRCode***********************************/
                 if(result==1){
                     qrcodepopup(disID,deptID);
                 }else{
-                    Toast.makeText(DisbursementListItemActivity.this,"Update!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DisbursementListItemActivity.this,"Update failed!",Toast.LENGTH_LONG).show();
                 }
 
 /******************************************************************************/
@@ -87,22 +97,25 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         AccountSession as = new AccountSession(this);
 
         String qrcode_url = URL.baseURL+"/AndroidServices/DisbursementListService.svc/Disbursement/"+disID+"/confirm&"+deptID;
-        Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,300,300);
+        Bitmap bit =QRCodeUtil.createQRImage(qrcode_url,400,400);
         iv.setImageBitmap(bit);
         d.show();
     }
     public class MyDisItemAdapter extends BaseAdapter {
         private Context mContext;
         private List<DisbursementItem> mData;
+        private StringBuilder canlogin;
 //        private LayoutInflater inflater;
         public MyDisItemAdapter() {
 
         }
 
-        public MyDisItemAdapter(Context mContext, List<DisbursementItem> mData) {
+        public MyDisItemAdapter(Context mContext, List<DisbursementItem> mData,StringBuilder canlogin) {
             this.mContext = mContext;
 //            this.inflater=LayoutInflater.from(mContext);
             this.mData = mData;
+            this.canlogin=canlogin;
+
         }
 
         @Override
@@ -134,7 +147,7 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                 expected.setText(String.valueOf(mData.get(position).getExpected()));
                 actual.setText(String.valueOf(mData.get(position).getActual()));
 
-                actual.addTextChangedListener(new ActualChangeListener(position));
+                actual.addTextChangedListener(new ActualChangeListener(position,expected,actual));
 //
 //
                 return convertView;
@@ -143,11 +156,16 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         private class ActualChangeListener implements TextWatcher{
 //            private ViewHolder holder;
                 private  int position;
+                private TextView expected;
+                private TextView actual;
+//                private boolean cancel=false;
 //            public ActualChangeListener(ViewHolder holder){
 //                this.holder=holder;
 //            }
-            public ActualChangeListener(int position){
+            public ActualChangeListener(int position,TextView expected,TextView actual){
                 this.position=position;
+                this.expected=expected;
+                this.actual=actual;
             }
 
             @Override
@@ -165,14 +183,24 @@ public class DisbursementListItemActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
                 if(editable.toString().equals("")){
+                    canlogin.setLength(0);
+                    canlogin.append("no");
+                    this.actual.setError("Can not be empty");
 
                 }else{
                     int expected=mData.get(this.position).getExpected();
                     int actual=Integer.parseInt(editable.toString());
                     if(actual>expected){
-                        Toast.makeText(DisbursementListItemActivity.this,"Must be less than expected!",Toast.LENGTH_SHORT).show();
-                        actual=expected;
+                        this.actual.setError("Must be less than expected!");
+                        canlogin.setLength(0);
+                        canlogin.append("no");
+//                        Toast.makeText(DisbursementListItemActivity.this,"Must be less than expected!",Toast.LENGTH_SHORT).show();
+//                        actual=expected;
                         return;
+                    }else{
+                        canlogin.setLength(0);
+                        canlogin.append("yes");
+                        this.actual.setError(null);
                     }
 
 //                    String id =mData.get(this.position).getItemID();
