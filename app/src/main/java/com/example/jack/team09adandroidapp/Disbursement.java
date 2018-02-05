@@ -117,9 +117,6 @@ public class Disbursement {
 
     public String qrcode_rep(String loginID,String url){
 
-//        Calendar today = Calendar.getInstance();
-//        today.set(Calendar.HOUR_OF_DAY,0);
-//        Date d = today.getTime();
         String d="testdate";
         JSONObject jsonObject = new JSONObject();
         try{

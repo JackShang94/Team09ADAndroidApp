@@ -63,8 +63,6 @@ public class AdjustmentVoucherCartItem implements Serializable {
 
 
     public int addNewAdjV(List<AdjustmentVoucherCartItem> adjVCart,String staffID){
-//        Gson gson=new Gson();
-//        String list=gson.toJson(adjVCart);
         JSONArray jsonArray=new JSONArray();
         for (AdjustmentVoucherCartItem cartItem :adjVCart)
         {
@@ -79,7 +77,6 @@ public class AdjustmentVoucherCartItem implements Serializable {
                 Log.e("notice",e.toString());
             }
         }
-//        String list = "{\"cartList\":"+jsonArray.toString()+"}";
 
         JSONObject jsonString = new JSONObject();
         try{
@@ -87,8 +84,6 @@ public class AdjustmentVoucherCartItem implements Serializable {
         }catch (Exception e){
             Log.e("cartlist",e.toString());
         }
-//        String staffID = "clerk001";
-//        jsonString
         String result= JSONParser.postStream(baseURL+"ADJV/post/addAdj/"+staffID,jsonString.toString());
         int result_int =0;
         try{

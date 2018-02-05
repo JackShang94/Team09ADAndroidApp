@@ -52,11 +52,6 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
         myAdapter = new AdjustmentVoucherCartAdapter(adjVCart, this, true);
         listViewCart.setAdapter(myAdapter);
 
-        //                if (result.isEmpty()) {
-//                    TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-//                    txtMsg.setVisibility(View.VISIBLE);
-//                }
-
         listViewCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,12 +98,6 @@ public class SubmitAdjustmentVoucherActivity extends Activity {
                     button_submit.setVisibility(View.VISIBLE);
 
                 }
-//                for (AdjustmentVoucherCartItem cartItem : adjVCart) {
-//                    if (cartItem.selected) {
-//                        adjVCart.remove(cartItem);
-//
-//                    }
-//                }
                 dataSave.setDataList("adjVCart", adjVCart);
                 myAdapter.notifyDataSetChanged();
                 listViewCart.invalidate();

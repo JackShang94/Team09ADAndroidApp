@@ -33,7 +33,6 @@ public class ItemListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_itemlist);
-//        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
         /***********************check login******************************/
         AccountSession as = new AccountSession(this);
         as.checkLogin(this);
@@ -41,7 +40,6 @@ public class ItemListActivity extends AppCompatActivity {
         Button button_search = (Button) findViewById(R.id.button_search);
         FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.fltbtn_add);
 
-        //show item catelog when this activity starts
         final ListView list = (ListView) findViewById(R.id.listview_itemlist);
         new AsyncTask<Void, Void, List<Item>>() {
             @Override
@@ -52,10 +50,6 @@ public class ItemListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Item> result) {
 
-//                if (result.isEmpty()) {
-//                    TextView txtMsg = (TextView) findViewById(R.id.txtMsg);
-//                    txtMsg.setVisibility(View.VISIBLE);
-//                }
                 SimpleAdapter adapter = new SimpleAdapter(ItemListActivity.this,
                         result, R.layout.simple_item_listview_item,
                         new String[]{"ItemID", "CategoryID", "Description"},

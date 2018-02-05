@@ -32,15 +32,12 @@ public class AddAdjustmentVoucherActivity extends Activity implements View.OnCli
     EditText editText_qty;
     EditText editText_rmk;
     Button button;
-    Button button_cart;
 
     //show item info
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_adjv_item);
-
-//        final StringBuilder canlogin = new StringBuilder();
         canlogin.append("no");
         initView();
     }

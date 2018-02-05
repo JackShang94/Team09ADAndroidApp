@@ -30,7 +30,6 @@ public class BreakdownByDepartment implements Serializable {
 
 
     final static String baseURL =URL.baseURL+"/AndroidServices/RetrievalFormItemService.svc/RetrievalFormItem/get";
-    //final static String baseURL = "http://192.168.1.95/AD/AndroidServices/RetrievalFormItemService.svc/RetrievalFormItem/get";
 
 
     public BreakdownByDepartment(){
@@ -66,8 +65,6 @@ public class BreakdownByDepartment implements Serializable {
         this.actual = actual;
     }
 
-
-    //JSONArray a = JSONParser.getJSONArrayFromUrl(baseURL);
 
     public static List<BreakdownByDepartment> getBreakdownByDepartment(JSONArray a) {
 

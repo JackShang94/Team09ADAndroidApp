@@ -52,7 +52,7 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
 
         }
         @Override
-        protected void onPostExecute(Void res){//something wrong???
+        protected void onPostExecute(Void res){
             int result_returnInt=0;
             try{
                 result_returnInt = Integer.valueOf(result);
@@ -62,9 +62,6 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
 
             if(result_returnInt==1){
                 Toast.makeText(DisbursementList_rep_Activity.this, "Update successfully", Toast.LENGTH_LONG).show();
-//                Intent refresh = new Intent(DisbursementList_rep_Activity.this, DisbursementItem_rep_Activity.class);
-//                startActivity(refresh);
-//                DisbursementList_rep_Activity.this.finish(); //
             }else{
                 Toast.makeText(DisbursementList_rep_Activity.this, "Failed Please try again", Toast.LENGTH_LONG).show();
             }
@@ -124,14 +121,11 @@ public class DisbursementList_rep_Activity extends AppCompatActivity {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(DisbursementList_rep_Activity.this);
 
                 intentIntegrator.initiateScan();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
         loadDis_rep loadAsync = new loadDis_rep(this,as.getUserDetails().get("loginID"));
         loadAsync.execute((Void) null);
-//
 
         disburseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

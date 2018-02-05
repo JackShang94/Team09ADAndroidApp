@@ -53,16 +53,6 @@ public class MyDisItemAdapter extends BaseAdapter{
         MyDisItemAdapter.ViewHolder holder = null;
         if (convertView == null){
             convertView = LayoutInflater.from(mContext).inflate(R.layout.disbursementitem,null);
-//          TextView itemID =  convertView.findViewById(R.id.itemIDtextview);
-//          TextView itemDesc = convertView.findViewById(R.id.itemDesctextview);
-//          TextView expected = convertView.findViewById(R.id.expected);
-//          EditText actual = convertView.findViewById(R.id.actual);
-//
-//          itemID.setText(mData.get(position).getItemID());
-//          itemDesc.setText(mData.get(position).getItemDesc());
-//          expected.setText(String.valueOf(mData.get(position).getExpected()));
-//          actual.setText(String.valueOf(mData.get(position).getActual()));
-
 
             holder = new MyDisItemAdapter.ViewHolder();
             holder.itemID=convertView.findViewById(R.id.itemIDtextview);
@@ -70,7 +60,7 @@ public class MyDisItemAdapter extends BaseAdapter{
             holder.expected=convertView.findViewById(R.id.expected);
             holder.actual= convertView.findViewById(R.id.actual);
 
-            convertView.setTag(holder);   //将Holder存储到convertView中
+            convertView.setTag(holder);
         }else{
             holder = (MyDisItemAdapter.ViewHolder) convertView.getTag();
         }
@@ -79,22 +69,6 @@ public class MyDisItemAdapter extends BaseAdapter{
         holder.itemDesc.setText(mData.get(position).getItemDesc());
         holder.expected.setText(String.valueOf(mData.get(position).getExpected()));
         holder.actual.setText(String.valueOf(mData.get(position).getActual()));
-//        holder.actual.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
         return convertView;
     }
 

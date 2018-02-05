@@ -54,10 +54,6 @@ public class QRCodeUtil {
             Bitmap bitmap = Bitmap.createBitmap(widthPix, heightPix, Bitmap.Config.ARGB_8888);
             bitmap.setPixels(pixels, 0, widthPix, 0, 0, widthPix, heightPix);
             return bitmap;
-//            if (logoBm != null) {
-//                bitmap = addLogo(bitmap, logoBm);
-//            }
-
             //Must compress save image to local file
 //            return bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath));
         } catch (WriterException e) {

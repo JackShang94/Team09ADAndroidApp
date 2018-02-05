@@ -49,13 +49,10 @@ public class Account {
 
         String url=URL.baseURL+"/AndroidServices/LoginService.svc/Login";
         JSONObject jsonObject = new JSONObject();
-//        Account a = new Account(email,password,"");
         try{
             jsonObject.put("email",email);
             jsonObject.put("password",password);
             jsonObject.put("role","");
-
-//            return 0;
         }
         catch (Exception e){
             Log.e("jsonobject put wrong",e.toString());

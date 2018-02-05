@@ -30,7 +30,6 @@ public class JSONParser {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-//                sb.append('\n');
             }
 
             is.close();
@@ -68,7 +67,6 @@ public class JSONParser {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
-//                sb.append('\n');
             }
             is.close();
         } catch (Exception e) {

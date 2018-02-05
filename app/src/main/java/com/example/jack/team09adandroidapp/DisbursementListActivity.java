@@ -77,15 +77,8 @@ public class DisbursementListActivity extends AppCompatActivity {
 
         pb = findViewById(R.id.dis_progress);
 
-
-//
-
-
         final Spinner spinner = findViewById(R.id.spinner);
         final ListView disburseList = findViewById(R.id.listview);
-
-
-
 
         new AsyncTask<Void,Void,List<String>>() {
             @Override
@@ -104,9 +97,6 @@ public class DisbursementListActivity extends AppCompatActivity {
                 spinner.setAdapter(deptadapter);
             }
         }.execute();
-
-
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -47,25 +47,18 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         final String disID = i.getStringExtra("disID");
         final String deptID = i.getStringExtra("deptID");
         DisbursementItem disi = new DisbursementItem();
-//        List<DisbursementItem> ldisi = new ArrayList<>();
         ldisi = disi.getDisbursementItemByDisID(disID);
         final StringBuilder canlogin = new StringBuilder();
         canlogin.append("yes");
         MyDisItemAdapter myDisItemAdapter = new MyDisItemAdapter(DisbursementListItemActivity.this, ldisi,canlogin);
         disItemlv.setAdapter(myDisItemAdapter);
-//        int k =disItemlv.getCount();
-//        if(disItemlv.getAdapter().getCount()!=0){
-//            submitBtn.setVisibility(View.GONE);
-//        }
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DisbursementItem disitem = new DisbursementItem();
                 int result =disitem.updateDisbursementItem(ldisi, disID);
-//                for(int i =disItemlv.getAdapter().getCount()-1;i>=0;i--){
-//                    View v =disItemlv.getAdapter().getView(i,LayoutInflater.from(DisbursementListItemActivity.this).inflate(R.layout.disbursementitem, null))
-//                    v.findViewById()
-//                }
+
                 if(canlogin.toString().equals("no")){
                     Toast.makeText(DisbursementListItemActivity.this,"Something wrong!",Toast.LENGTH_LONG).show();
                     return;
@@ -76,13 +69,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(DisbursementListItemActivity.this,"Update failed!",Toast.LENGTH_LONG).show();
                 }
-
-/******************************************************************************/
-
-
-//                startActivity(new Intent(DisbursementListItemActivity.this, DisbursementListActivity.class));
-//                Toast.makeText(DisbursementListItemActivity.this,"update!",Toast.LENGTH_LONG).show();
-//                finish();
             }
         });
 
@@ -105,14 +91,12 @@ public class DisbursementListItemActivity extends AppCompatActivity {
         private Context mContext;
         private List<DisbursementItem> mData;
         private StringBuilder canlogin;
-//        private LayoutInflater inflater;
         public MyDisItemAdapter() {
 
         }
 
         public MyDisItemAdapter(Context mContext, List<DisbursementItem> mData,StringBuilder canlogin) {
             this.mContext = mContext;
-//            this.inflater=LayoutInflater.from(mContext);
             this.mData = mData;
             this.canlogin=canlogin;
 
@@ -135,7 +119,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-//
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.disbursementitem, null);
                 TextView itemID = convertView.findViewById(R.id.itemIDtextview);
                 TextView itemDesc = convertView.findViewById(R.id.itemDesctextview);
@@ -154,14 +137,10 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 //
         }
         private class ActualChangeListener implements TextWatcher{
-//            private ViewHolder holder;
+
                 private  int position;
                 private TextView expected;
                 private TextView actual;
-//                private boolean cancel=false;
-//            public ActualChangeListener(ViewHolder holder){
-//                this.holder=holder;
-//            }
             public ActualChangeListener(int position,TextView expected,TextView actual){
                 this.position=position;
                 this.expected=expected;
@@ -175,7 +154,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                isOnTextChanged=true;
 
             }
 
@@ -194,8 +172,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                         this.actual.setError("Must be less than expected!");
                         canlogin.setLength(0);
                         canlogin.append("no");
-//                        Toast.makeText(DisbursementListItemActivity.this,"Must be less than expected!",Toast.LENGTH_SHORT).show();
-//                        actual=expected;
                         return;
                     }else{
                         canlogin.setLength(0);
@@ -203,7 +179,6 @@ public class DisbursementListItemActivity extends AppCompatActivity {
                         this.actual.setError(null);
                     }
 
-//                    String id =mData.get(this.position).getItemID();
                     mData.get(this.position).setActual(actual);
                 }
 
